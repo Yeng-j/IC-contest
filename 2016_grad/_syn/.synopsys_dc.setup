@@ -1,0 +1,44 @@
+# =========================================================================== #
+#   Guides of dc_setup
+#   1. Modify this file to fit your own environment
+#   2. Copy this file from synopsys_dc.setup to .synopsys_dc.setup (Shade it)
+#      and put it in tool's invoking directory or your home directory.
+# =========================================================================== #
+
+set company "CIC"
+set designer "Student"
+
+# Check your db folders
+set search_path      "/cad/CBDK/CBDK_IC_Contest_v2.5/SynopsysDC/db  $search_path" 
+#set search_path      "/cad/CBDK/CBDK_UMC018_ITRI_v0.8/CIC/SynopsysDC/db  $search_path"      
+
+# Check your db files
+#set target_library   " fast.db slow.db typical.db "  
+#set target_library   " UDVS_u018mmwc162v.db UDVS_u018mmbc198v.db UDVS_u018mmtc18v.db U018IOCUP_tc18vt33v.db " 
+set target_library   "  slow.db  "
+set symbol_library   "generic.sdb" 
+
+# Check your corner files
+set link_library     "* $target_library dw_foundation.sldb"       
+
+# DesignWare slow db file
+set synthetic_library "dw_foundation.sldb"                                                      
+
+set hdlin_translate_off_skip_text "TRUE"
+set edifout_netlist_only "TRUE"
+set verilogout_no_tri true
+
+set sh_enable_line_editing true
+set sh_line_editing_mode emacs
+history keep 100
+alias h history
+
+
+set bus_inference_style {%s[%d]}
+set bus_naming_style {%s[%d]}
+set hdlout_internal_busses true
+define_name_rules name_rule -allowed {a-z A-Z 0-9 _} -max_length 255 -type cell
+define_name_rules name_rule -allowed {a-z A-Z 0-9 _[]} -max_length 255 -type net
+define_name_rules name_rule -map {{"\\*cell\\*" "cell"}}
+
+
